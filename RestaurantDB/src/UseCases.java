@@ -23,6 +23,7 @@ public class UseCases {
                 + "loginTimeout=30;";
     }
 
+    // for use case 2
     public static void insertMenuItemSP(String menuItem, float price, String ingredient, String equipment) {
 
         String callStoredProc = "{call dbo.insertMenuItem(?,?, ?, ?)}";
@@ -39,5 +40,7 @@ public class UseCases {
             e.printStackTrace();
         }
     }
+
+    //
 
 }
