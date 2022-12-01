@@ -1,6 +1,6 @@
 create table Customer (
     ID INT identity (1,1)  NOT NULL,
-    name varchar(20) NOT NULL,
+    customerName varChar(20) NOT NULL,
     primary key(ID)
 );
 
@@ -12,28 +12,28 @@ create table CustomerOrder (
 
 create table Ingredient (
     ID INT identity (1,1)  NOT NULL,
-    name varchar(20) NOT NULL,
+    ingredientName varchar(20) NOT NULL,
     category varchar(20),
     primary key(ID)
 );
 
 create table Supplier (
     ID INT identity (1,1)  NOT NULL,
-    name varchar(20) NOT NULL,
+    supplierName varchar(20) NOT NULL,
     category varchar(20) NOT NULL,
     primary key(ID)
 );
 
 create table Equipment(
    ID INT identity(1,1) not NULL,
-   name varchar(20) not Null,
+   equipmentName varchar(20) not Null,
    manufacturer varchar(20),
    primary key(ID)
 );
  
 create table MenuItem(
    ID INT identity(1,1) not Null,
-   name varchar(20) not Null,
+   menuItemName varchar(20) not Null,
    price numeric(10,2),
    primary key(ID)
 );
