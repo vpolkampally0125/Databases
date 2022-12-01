@@ -3,8 +3,6 @@ create procedure MakeOrder
 @customer_name  varchar(20),
 @item_name  varchar(20),
 
-@id int output
-
 as
 
 begin
@@ -23,6 +21,5 @@ insert into OrderedItem (orderID, menuItemID) values (
     (SELECT ID from MenuItem where @item_name = menuItemName)
 )
 
-select @id = SCOPE_IDENTITY();
 
 end
