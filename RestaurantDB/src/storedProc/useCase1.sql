@@ -18,7 +18,7 @@ insert into Buys (customerID, orderID) values (
     SELECT max(ID) from Order
 )
 
-insert into OrderedItems(orderID, menuItemID) values (
+insert into OrderedItem(orderID, menuItemID) values (
     SELECT max(ID) from Order
     SELECT ID from MenuItem where @item_name = name
 )
