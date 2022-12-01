@@ -1,7 +1,7 @@
 create procedure MakeOrder
 
 @customer_name  varchar(20),
-@item_name  varchar(20)
+@item_name  varchar(20),
 
 @id int output
 
@@ -9,18 +9,18 @@ as
 
 begin
 
-insert into Order (cost) values (
-    SELECT cost from MenuItem where @item_name = name 
+insert into CustomerOrder (price) values (
+    (SELECT price from MenuItem where @item_name = menuItemName)
 );
 
 insert into Buys (customerID, orderID) values (
-    SELECT ID from Customer where @customer_name = name,
-    SELECT max(ID) from Order
+    (SELECT ID from Customer where @customer_name = customerName),
+    (SELECT max(ID) from CustomerOrder)
 )
 
-insert into OrderedItem(orderID, menuItemID) values (
-    SELECT max(ID) from Order
-    SELECT ID from MenuItem where @item_name = name
+insert into OrderedItem (orderID, menuItemID) values (
+    (SELECT max(ID) from CustomerOrder),
+    (SELECT ID from MenuItem where @item_name = menuItemName)
 )
 
 select @id = SCOPE_IDENTITY();
