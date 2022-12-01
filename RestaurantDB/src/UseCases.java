@@ -103,4 +103,34 @@ public class UseCases {
     }
 
     // for use case 7
+    public static void findMenuItemIngredients(String menuItem) {
+
+        String callStoredProc = "{call dbo.FindMenuItemIngredients(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsFindMenuItemIngredients = connection.prepareStatement(callStoredProc);) {
+            prepsFindMenuItemIngredients.setString(1, menuItem);
+            prepsFindMenuItemIngredients.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // for use case 8
+    public static void findOrdersBasedOnCost(float cost) {
+
+        String callStoredProc = "{call dbo.FindOrdersBasedOnCost(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsFindOrders = connection.prepareStatement(callStoredProc);) {
+            prepsFindOrders.setFloat(1, cost);
+            prepsFindOrders.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // for use case 10
 }

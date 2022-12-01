@@ -1,0 +1,26 @@
+
+create procedure FindOrderHistory
+
+@customer_name varchar(20)
+
+as
+
+begin
+
+/*
+Nested queries 
+
+selects all buy tuples that the input customerName is related to:
+SELECT * from Customer JOIN Buys where Customer.id = Buys.Customer.id
+
+selects all orders that a customer has bought:
+SELECT * from ? JOIN Orders where ?.Order.id = Orders.id
+
+selects all ordered items that a customer has bought:
+SELECT * from ? JOIN OrderItems where ?.Order.id = OrderItems.id
+
+selects all menu items that a customer has bought:
+SELECT * from ? JOIN MenuItems where ?.OrderItems.id = OrderItems.id
+*/
+
+end
