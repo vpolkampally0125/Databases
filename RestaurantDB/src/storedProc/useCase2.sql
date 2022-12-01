@@ -12,9 +12,9 @@ as
 
 begin
 
-insert into menuItem (name, price)  values(@price, @menu_item_name);
+insert into MenuItem (name, price) values (@price, @menu_item_name);
 
-insert into recipie (IngredientId, MenuItemId, EquipmentId) values(
+insert into Recipe (IngredientId, MenuItemId, EquipmentId) values(
     SELECT id from ingredent where ingredentId = @ingredent,
     SELECT max(id) from MenuItem,
     SELECT id from equipment where EquipmentId = @equipment,

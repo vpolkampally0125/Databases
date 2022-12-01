@@ -57,6 +57,51 @@ public class UseCases {
         }
     }
 
-    //
+    // for use case 4
+    public static void updateOrderSP(int orderID, String menuItem) {
 
+        String callStoredProc = "{call dbo.ChangeOrder(?,?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsUpdateOrder = connection.prepareStatement(callStoredProc);) {
+            prepsUpdateOrder.setInt(1, orderID);
+            prepsUpdateOrder.setString(2, menuItem);
+            prepsUpdateOrder.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // for use case 5
+    public static void deleteMenuItem(String menuItem) {
+
+        String callStoredProc = "{call dbo.DeleteMenuItem(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsDeleteMenuItem = connection.prepareStatement(callStoredProc);) {
+            prepsDeleteMenuItem.setString(1, menuItem);
+            prepsDeleteMenuItem.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // for use case 6
+    public static void deleteIngredient(String ingredient) {
+
+        String callStoredProc = "{call dbo.DeleteIngredient(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsDeleteIngredient = connection.prepareStatement(callStoredProc);) {
+            prepsDeleteIngredient.setString(1, ingredient);
+            prepsDeleteIngredient.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // for use case 7
 }
