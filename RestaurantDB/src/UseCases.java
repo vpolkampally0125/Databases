@@ -13,14 +13,13 @@ public class UseCases {
     // Connect to your database.
     // Replace server name, username, and password with your credentials
     public static void main(String[] args) {
-        String connectionUrl = 
-            "jdbc:sqlserver://CSDSWINLAB017\\SQLEXPRESS;"
-            + "database=restaurantDB;"         //change this
-            + "user=dbuser;"                 //change this
-            + "password=scsd431134dscs;"   //change this
-            + "encrypt=true;"
-            + "trustServerCertificate=true;"
-            + "loginTimeout=15;";
+        connectionUrl = "jdbc:sqlserver://CSDSWINLAB017\\SQLEXPRESS;"
+                + "database=restaurantDB;" // change this
+                + "user=dbuser;" // change this
+                + "password=scsd431134dscs;" // change this
+                + "encrypt=true;"
+                + "trustServerCertificate=true;"
+                + "loginTimeout=15;";
     }
 
     // for use case 1
