@@ -6,7 +6,7 @@ create table Customer (
 
 create table CustomerOrder (
     ID INT identity (1,1)  NOT NULL,
-    cost numeric(10,2),
+    price numeric(10,2),
     primary key(ID)
 );
 
