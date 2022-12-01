@@ -23,10 +23,26 @@ public class UseCases {
                 + "loginTimeout=30;";
     }
 
+    // for use case 1
+    public static void insertOrderSP(String customerName, String menuItem) {
+
+        String callStoredProc = "{call dbo.MakeNewOrder(?,?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsInsertOrder = connection.prepareStatement(callStoredProc);) {
+            prepsInsertOrder.setString(1, customerName);
+            prepsInsertOrder.setString(2, menuItem);
+            prepsInsertOrder.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // for use case 2
     public static void insertMenuItemSP(String menuItem, float price, String ingredient, String equipment) {
 
-        String callStoredProc = "{call dbo.insertMenuItem(?,?, ?, ?)}";
+        String callStoredProc = "{call dbo.MakeNewMenuItem(?,?, ?, ?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
                 PreparedStatement prepsInsertMenuItem = connection.prepareStatement(callStoredProc);) {
