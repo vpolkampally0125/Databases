@@ -173,9 +173,9 @@ public class UseCases {
             prepsFindOrderHistory.setString(1, name);
             
             ResultSet resultSet = prepsFindOrderHistory.executeQuery();
-            String res = "Orders: ";
+            String res = "Orders- ";
             while (resultSet.next()) {
-                res += resultSet.getString(1) + " "; 
+                res += "#"+resultSet.getString(1) + ":" + resultSet.getString(2); 
             }
             return res;
 

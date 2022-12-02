@@ -6,6 +6,10 @@ create procedure FindOrderHistory
 as
 
 begin
-    
-    SELECT * from (SELECT * from (SELECT * from (SELECT * from Customer, Buys where 'Jeff' = customerName and customerID = Buys.customerID) as A, CustomerOrder where A.orderID = orderID) as B, OrderItem where B.orderID = OrderItemID) as C, MenuItem where C.OrderItemID = OrderItemID
+    select CustomerOrder.ID, menuItemName from Customer
+        join Buys on Customer.ID = Buys.customerID
+        join CustomerOrder on CustomerOrder.ID = Buys.orderID
+        join OrderedItem on CustomerOrder.ID = OrderedItem.orderID
+        join MenuItem on MenuItem.ID = menuItemID
+        where customerName = @customer_name
 end
