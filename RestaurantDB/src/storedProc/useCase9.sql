@@ -9,7 +9,7 @@ begin
 
     (((SELECT *
     from Customer, Buys 
-    where Customer.id = Buys.Customer.id and @customer_name=name)
+    where Customer.id = Buys.Customer.id and @customer_name=customerName)
     as A
     (SELECT *
     from A, Orders 

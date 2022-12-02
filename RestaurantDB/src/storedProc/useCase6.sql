@@ -8,8 +8,8 @@ as
 
 begin
 
-    DELETE from Supplies where @ingreident = name
-    DELETE from Ingredient where @ingredient = name
+    DELETE from Supplies where @ingreident = ingredientName
+    DELETE from Ingredient where @ingredient = ingredientName
 
 
 end
