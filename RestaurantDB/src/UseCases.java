@@ -9,14 +9,21 @@ import java.sql.ResultSet;
 public class UseCases {
 
     static final String connectionUrl = "jdbc:sqlserver://CSDSWINLAB017\\SQLEXPRESS;"
-        + "database=restaurantDB;"      // DB Name
-        + "user=dbuser;"                // user name
-        + "password=scsd431134dscs;"    // password
-        + "encrypt=true;"
-        + "trustServerCertificate=true;"
-        + "loginTimeout=15;";
+            + "database=restaurantDB;" // DB Name
+            + "user=dbuser;" // user name
+            + "password=scsd431134dscs;" // password
+            + "encrypt=true;"
+            + "trustServerCertificate=true;"
+            + "loginTimeout=15;";
 
-    // for use case 1
+    /*
+     * For use case 1
+     * Calls MakeOrder SQL stored procedure to let a existing customer order a menu
+     * item
+     * Input: String customernName that represents the customer that will be
+     * ordering
+     * Input: String menuItem that represents the menu item that is being ordered
+     */
     public static void insertOrderSP(String customerName, String menuItem) {
 
         String callStoredProc = "{call dbo.MakeOrder(?,?)}";
@@ -32,7 +39,16 @@ public class UseCases {
         }
     }
 
-    // for use case 2
+    /*
+     * For use case 2
+     * Calls MakeNewMenuItem SQL stored procedure to let a make a new menu item
+     * Input: String menuItem that represents the menu item name that is being
+     * created
+     * Input: float price that represents the price of the menu item that is being
+     * created
+     * Input: String ingredient that represents an ingredient used for the menu item
+     * Input: String equipment that represnts the equipment used for the menu item
+     */
     public static void insertMenuItemSP(String menuItem, float price, String ingredient, String equipment) {
 
         String callStoredProc = "{call dbo.MakeNewMenuItem(?,?, ?, ?)}";
@@ -50,7 +66,17 @@ public class UseCases {
         }
     }
 
-    // for use case 3
+    /*
+     * For use case 3
+     * Calls ChangeMenuItem SQL stored procedure to make a change to an existing
+     * menu item
+     * Input: String menuItem that represents the menu item name to be changed
+     * Input: String ingredientReplaced that represents the ingredient to be
+     * replaced
+     * Input: String ingredientReplacing that represnts the replacing ingredient
+     * Input: String equipmentReplaced that represents the equipment to be replaced
+     * Input: String equipmentReplacing that represnts the replacing eqiupment
+     */
     public static void changeMenuItem(String menuItem, String ingredientReplaced, String ingredientReplacing,
             String equipmentReplaced, String equipmentReplacing) {
 
@@ -70,7 +96,13 @@ public class UseCases {
         }
     }
 
-    // for use case 4
+    /*
+     * For use case 4
+     * Calls the UpdateOrder SQL stored procedure to update a existing customer
+     * order
+     * Input: int orderID that represents the order to be changed
+     * Input: String menuItem that represents the new menuItem to be ordered
+     */
     public static void updateOrderSP(int orderID, String menuItem) {
 
         String callStoredProc = "{call dbo.ChangeOrder(?,?)}";
@@ -86,7 +118,11 @@ public class UseCases {
         }
     }
 
-    // for use case 5
+    /*
+     * For use case 5
+     * Calls DeleteMenuItem SQL stored procedure to delete an existing menu item
+     * Input: String menuItem that represents the menu item to be deleted
+     */
     public static void deleteMenuItem(String menuItem) {
 
         String callStoredProc = "{call dbo.DeleteMenuItem(?)}";
@@ -101,7 +137,11 @@ public class UseCases {
         }
     }
 
-    // for use case 6
+    /*
+     * For use case 6
+     * Calls DeleteIngredient SQL stored procedure to delete an ingredient
+     * Input: String ingredient that represents the ingredient to be deleted
+     */
     public static void deleteIngredient(String ingredient) {
 
         String callStoredProc = "{call dbo.DeleteIngredient(?)}";
@@ -116,7 +156,12 @@ public class UseCases {
         }
     }
 
-    // for use case 7
+    /*
+     * For use caes 7
+     * Calls FindMenuItemIngredients SQL stored procedures to give all the
+     * ingredients a menu item uses
+     * Input: String menuItem to represent the menu item in question
+     */
     public static String findMenuItemIngredients(String menuItem) {
 
         String callStoredProc = "{call dbo.FindMenuItemIngredients(?)}";
@@ -124,11 +169,11 @@ public class UseCases {
         try (Connection connection = DriverManager.getConnection(connectionUrl);
                 CallableStatement prepsFindMenuItemIngredients = connection.prepareCall(callStoredProc);) {
             prepsFindMenuItemIngredients.setString(1, menuItem);
-            
+
             ResultSet resultSet = prepsFindMenuItemIngredients.executeQuery();
             String res = "Ingredients: ";
             while (resultSet.next()) {
-                res += resultSet.getString(1) + " "; 
+                res += resultSet.getString(1) + " ";
             }
             return res;
 
@@ -138,7 +183,12 @@ public class UseCases {
         return "";
     }
 
-    // for use case 8
+    /*
+     * For use case 8
+     * Calls FindOrderBasedOnCost SQL stored procedure to give the orders that are
+     * the same as the input cost
+     * Input: float cost that represents the cost in question
+     */
     public static String findOrdersBasedOnCost(float cost) {
 
         String callStoredProc = "{call dbo.FindOrdersBasedOnCost(?,?)}";
@@ -155,7 +205,12 @@ public class UseCases {
         return "";
     }
 
-    // for use case 9
+    /*
+     * For use case 9
+     * Calls FindOrderHistory SQL stored procedure to give all the orders that a
+     * customer has ordered
+     * Input: String name that represents the customer in question
+     */
     public static String findOrderHistory(String name) {
 
         String callStoredProc = "{call dbo.FindOrderHistory(?)}";
@@ -163,11 +218,11 @@ public class UseCases {
         try (Connection connection = DriverManager.getConnection(connectionUrl);
                 CallableStatement prepsFindOrderHistory = connection.prepareCall(callStoredProc);) {
             prepsFindOrderHistory.setString(1, name);
-            
+
             ResultSet resultSet = prepsFindOrderHistory.executeQuery();
-            String res = "Orders by ";
+            String res = "Orders:";
             while (resultSet.next()) {
-                res += "#"+resultSet.getString(1) + ":" + resultSet.getString(2); 
+                res += "#" + resultSet.getString(1) + ":" + resultSet.getString(2) + " ";
             }
             return res;
 
@@ -177,7 +232,12 @@ public class UseCases {
         return "";
     }
 
-    // for use case 10
+    /*
+     * For use case 10
+     * Calls FindSupplierIngredients SQL stored procedure to give all ingredients
+     * that a supplier supplies
+     * Input: String name that represents the supplier in question
+     */
     public static String findSupplierIngredients(String name) {
 
         String callStoredProc = "{call dbo.FindSupplierIngredients(?)}";
@@ -187,9 +247,9 @@ public class UseCases {
             prepsFindSupplierIngredients.setString(1, name);
 
             ResultSet resultSet = prepsFindSupplierIngredients.executeQuery();
-            String res = "Ingredients by ";
+            String res = "Ingredients:";
             while (resultSet.next()) {
-                res += resultSet.getString(1) + " "; 
+                res += resultSet.getString(1) + " ";
             }
             return res;
 
