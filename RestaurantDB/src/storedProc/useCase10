@@ -7,16 +7,10 @@ as
 
 begin
 
-
-
-    ((SELECT *
-    from Supplier JOIN Supplies 
-    where SupplierID = Supplies.SupplierID and @supplier_name=name)
-    as A
     (SELECT *
-    from A JOIN Ingredients 
+    from (SELECT *
+        from Supplier, Supplies
+        where SupplierID = Supplies.SupplierID and @supplier_name=name) as A, Ingredients
     where A.IngredientsID = Ingredients.ID)
-    )
-
 
 end
