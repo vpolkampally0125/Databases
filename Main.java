@@ -325,7 +325,9 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                System.out.println(customerName);
+                JOptionPane.showMessageDialog(frame,
+                customerName, "List",
+                JOptionPane.PLAIN_MESSAGE);
                 //findOrderHistory(customerName);
             }
         }
@@ -338,7 +340,9 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                System.out.println(supplierName);
+                JOptionPane.showMessageDialog(frame,
+                supplierName, "List",
+                JOptionPane.PLAIN_MESSAGE);
                 //findSupplierIngredients(supplierName);
             }
         }
