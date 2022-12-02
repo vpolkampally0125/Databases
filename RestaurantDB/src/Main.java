@@ -44,15 +44,6 @@ class Main {
     JButton b4 = new JButton("-");
     JButton b5 = new JButton("-");
     JButton test3[] = {b1, b2, b3, b4, b5};
- /*
-    JButton c1 = new JButton("test4");
-    JButton c2 = new JButton("");
-    JButton test4[] = {c1, c2};
-
-    JButton d1 = new JButton("test5");
-    JButton d2 = new JButton("");
-    JButton test5[] = {d1, d2};
-*/
 
     public static void main(String[] args) {
         Main t = new Main();
@@ -65,32 +56,17 @@ class Main {
             b.setOpaque(true);
             b.setForeground(Color.green);
             b.setBackground(Color.red);
-            //b.addActionListener(this);
         }
         for (JButton b : test2) {
             b.setOpaque(true);
             b.setForeground(Color.black);
             b.setBackground(Color.white);
-            //b.addActionListener(this);
         }
         for (JButton b : test3) {
             b.setOpaque(true);
             b.setForeground(Color.yellow);
             b.setBackground(Color.blue);
-            //b.addActionListener(this);
-        } /*
-        for (JButton b : test4) {
-            b.setOpaque(true);
-            b.setForeground(Color.green);
-            b.setBackground(Color.green);
-            //b.addActionListener(this);
-        }
-        for (JButton b : test5) {
-            b.setOpaque(true);
-            b.setForeground(Color.pink);
-            b.setBackground(Color.pink);
-            //b.addActionListener(this);
-        } */
+        } 
     }
 
     public void makeGUI() {
@@ -118,9 +94,6 @@ class Main {
             body.add(test1[i]); 
             test1[i].setText(row1[i]);
             test1[i].setFont(new Font("Comic Sans MS", Font.BOLD,24));
-            /*
-            body.add(test4[i]);
-            body.add(test5[i]); */
         }
         for (int i = 0; i < test2.length; i++) {
             body.add(test2[i]);
@@ -151,9 +124,6 @@ class Main {
         recB = new JButton("2");
         play = new JButton("3");
         clear = new JButton("4");
-        //clear.addActionListener(this);
-        //recB.addActionListener(this);
-        //play.addActionListener(this);
         play.setOpaque(true);
         play.setForeground(new Color(73,156,84));
         clear.setOpaque(true);
@@ -168,7 +138,7 @@ class Main {
         panel.add(header, BorderLayout.NORTH);
         panel.add(body, BorderLayout.CENTER);
         panel.add(footer, BorderLayout.SOUTH);
-        panel.setPreferredSize(new Dimension(1200, 900));
+        panel.setPreferredSize(new Dimension(800, 600));
         frame.pack();   
      }
      class secondAction implements ActionListener{
@@ -201,20 +171,19 @@ class Main {
             }
             else {
                 for(int i=0; i < ingArr.length; i++){
-                    UseCases.insertMenuItemSP(menuItem, dollar, ingArr[i], eqpArr[i]);
+                    try{
+                        UseCases.insertMenuItemSP(menuItem, dollar, ingArr[i], eqpArr[i]);
+                    } catch(Exception sql){
+                        JOptionPane.showMessageDialog(frame,
+                "Invalid Input!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
-            System.out.println("ingredients list ");
-            for (String s : ingArr) {
-                System.out.println(s);
-            }
-            System.out.println("lgbtqia+/!@#");
-            for (String s : eqpArr) {
-                System.out.println(s);
-            }
-        
         }
      }
+
+     
      class firstAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String customerName = JOptionPane.showInputDialog(frame, "Enter Customer Name: ",JOptionPane.PLAIN_MESSAGE);
@@ -223,8 +192,13 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else {
-              UseCases.insertOrderSP(customerName, menuItem);
-              System.out.println(customerName + ' ' + menuItem);
+                try{
+                    UseCases.insertOrderSP(customerName, menuItem);
+                } catch(Exception sql){
+                    JOptionPane.showMessageDialog(frame,
+            "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
      }
@@ -235,10 +209,16 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                UseCases.findMenuItemIngredients(menuItem); 
-                JOptionPane.showMessageDialog(frame,
-                menuItem, "List",
-                JOptionPane.PLAIN_MESSAGE);  
+                try{
+                    String result = menuItem + " " + UseCases.findMenuItemIngredients(menuItem); 
+                    JOptionPane.showMessageDialog(frame,
+                    menuItem, "List",
+                    JOptionPane.PLAIN_MESSAGE);
+                } catch(Exception sql){
+                    JOptionPane.showMessageDialog(frame,
+            "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
      }
@@ -247,23 +227,23 @@ class Main {
             boolean virus = false;
             float dollar = 0;
             while (!virus) {
-            try {
-            float price = Float.parseFloat(JOptionPane.showInputDialog(frame, "Enter Price of type Float: ",JOptionPane.PLAIN_MESSAGE));
-            virus = true;
-            dollar = price;
-            }
-            catch (Exception E) {
+                try {
+                float price = Float.parseFloat(JOptionPane.showInputDialog(frame, "Enter Price of type Float: ",JOptionPane.PLAIN_MESSAGE));
+                virus = true;
+                dollar = price;
+
+                String result = UseCases.findOrdersBasedOnCost(dollar);
                 JOptionPane.showMessageDialog(frame,
-                "Invalid Input!", "Error",
-                JOptionPane.ERROR_MESSAGE);
-                virus = false;
+                    result, "List",
+                    JOptionPane.PLAIN_MESSAGE);
+                }
+                catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                    virus = false;
+                }
             }
-            }
-            String result = UseCases.findOrdersBasedOnCost(dollar);
-            JOptionPane.showMessageDialog(frame,
-                result, "List",
-                JOptionPane.PLAIN_MESSAGE);
-            
         }
     }
      class fifthAction implements ActionListener{
@@ -273,8 +253,13 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                UseCases.deleteIngredient(ingredient); 
-                System.out.println(ingredient);   
+                try{
+                    UseCases.deleteIngredient(ingredient);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
             }
         }
      }
@@ -286,8 +271,13 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                //System.out.println(orderId + ' ' + menuItem);
-                UseCases.updateOrderSP(orderId, menuItem);
+                try{
+                    UseCases.updateOrderSP(orderId, menuItem);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
             }
         }
      }
@@ -298,8 +288,13 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                //System.out.println(menuItem);
-                UseCases.deleteMenuItem(menuItem);
+                try{
+                    UseCases.deleteMenuItem(menuItem);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
             }
         }
      }
@@ -315,7 +310,13 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                UseCases.changeMenuItem(menuItem, ingredientReplaced, ingredientReplacing, equipmentReplaced, equipmentReplacing);
+                try{   
+                    UseCases.changeMenuItem(menuItem, ingredientReplaced, ingredientReplacing, equipmentReplaced, equipmentReplacing);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
             }
         }
      }
@@ -327,26 +328,36 @@ class Main {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                String result = customerName + ": " + UseCases.findOrderHistory(customerName);
-                JOptionPane.showMessageDialog(frame,
-                    result, "List",
-                    JOptionPane.PLAIN_MESSAGE);
-                
+                try{
+                    String result = customerName + " " + UseCases.findOrderHistory(customerName);
+                    JOptionPane.showMessageDialog(frame,
+                        result, "List",
+                        JOptionPane.PLAIN_MESSAGE);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
             }
         }
      }
      class tenthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            //findSupplierIngredients(String name)
             String supplierName = JOptionPane.showInputDialog(frame, "Enter Name of Supplier ",JOptionPane.PLAIN_MESSAGE);
             if (supplierName.length() <= 0) {
                 JOptionPane.showMessageDialog(frame,"INVALID INPUT!", "ERROR",JOptionPane.ERROR_MESSAGE);
             }
             else{
-                String result = supplierName + ": " + UseCases.findSupplierIngredients(supplierName);
-                JOptionPane.showMessageDialog(frame,
-                    result, "List",
-                    JOptionPane.PLAIN_MESSAGE);
+                try{
+                    String result = supplierName + " " + UseCases.findSupplierIngredients(supplierName);
+                    JOptionPane.showMessageDialog(frame,
+                        result, "List",
+                        JOptionPane.PLAIN_MESSAGE);
+                } catch (Exception E) {
+                    JOptionPane.showMessageDialog(frame,
+                    "Invalid Input!", "Error",
+                    JOptionPane.ERROR_MESSAGE);    
+                }
 
             }
         }
