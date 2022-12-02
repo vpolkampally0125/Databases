@@ -2,6 +2,7 @@
 create procedure FindMenuItemIngredients
 
     @menu_item varchar(20)
+    @out varchar(256) OUTPUT
 
 as
 

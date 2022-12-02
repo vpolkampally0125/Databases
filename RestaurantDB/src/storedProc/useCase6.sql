@@ -9,7 +9,7 @@ as
 begin
 
     DELETE from Supplies where (SELECT ID 
-    from Ingredients 
+    from Ingredient
     where @ingredient = ingredientName) = ingredientID
     DELETE from Ingredient where @ingredient = ingredientName
 
