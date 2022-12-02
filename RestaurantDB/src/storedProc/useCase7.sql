@@ -17,7 +17,7 @@ begin
         from MenuItem
         where @menu_item = menuItemName)
 )) as item_recipe, Ingredient
-    where item_recipe.ingredientID = ingredientID
+    where item_recipe.ingredientID = ingredientID and item_recipe.menuItemID = menuItemID
 
 
 end
