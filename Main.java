@@ -184,7 +184,7 @@ class Main {
             }
             catch (Exception E) {
                 JOptionPane.showMessageDialog(frame,
-                "Eggs are not supposed to be green.", "Virus Alert",
+                "Invalid Input!", "Error",
                 JOptionPane.ERROR_MESSAGE);
                 virus = false;
             }
@@ -196,7 +196,7 @@ class Main {
 
             if (ingArr.length != eqpArr.length || menuItem.length() == 0 || ingArr.length == 0 || eqpArr.length == 0) {
                 JOptionPane.showMessageDialog(frame,
-                "Eggs are not supposed to be green.", "Virus Alert",
+                "Invalid Input!", "Error",
                 JOptionPane.ERROR_MESSAGE);
             }
             else {
@@ -252,7 +252,7 @@ class Main {
             }
             catch (Exception E) {
                 JOptionPane.showMessageDialog(frame,
-                "Eggs are not supposed to be green.", "Virus Alert",
+                "Invalid Input!", "Error",
                 JOptionPane.ERROR_MESSAGE);
                 virus = false;
             }
