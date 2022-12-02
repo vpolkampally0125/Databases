@@ -14,22 +14,21 @@ begin
     update Recipe
 set ingredientID = (SELECT ID
     from Ingredient
-    where name =@ingredient_replacing)
+    where ingredientName =@ingredient_replacing)
 where (SELECT ID
         from MenuItem
-        where @menu_item_name = name) = Recipe.MenuItemID and Recipe.Ingredient.ID = (SELECT ID
+        where @menu_item_name = menuItemName) = Recipe.menuItemID and Recipe.ingredientID = (SELECT ID
         from Ingredient
-        where name =@ingredient_replaced)
+        where ingredientName =@ingredient_replaced)
 
     update Recipe
 set equipmentID = (SELECT ID
     from Equipment
-    where name =@equipment_replacing)
+    where equipmentName =@equipment_replacing)
 where (SELECT ID
         from MenuItem
-        where @menu_item_name = name) = Recipe.MenuItemID and Recipe.Equipment.ID = (SELECT ID
+        where @menu_item_name = menuItemName) = Recipe.menuItemID and Recipe.equipmentID = (SELECT ID
         from Equipment
-        where name =@equipment_replaced)
-
+        where equipmentName =@equipment_replaced)
 
 end
