@@ -8,19 +8,19 @@ as
 begin
 
     (((SELECT *
-    from Customer JOIN Buys 
+    from Customer, Buys 
     where Customer.id = Buys.Customer.id and @customer_name=name)
     as A
     (SELECT *
-    from A JOIN Orders 
+    from A, Orders 
     where A.Order.id = Orders.id)
     ) as B
     SELECT *
-    from B JOIN OrderItems 
+    from B, OrderItems 
     where B.Order.id = OrderItems.id
     ) as C
     SELECT *
-    from C JOIN MenuItems 
+    from C, MenuItems 
     where C.OrderItems.id = OrderItems.id
 
 end
