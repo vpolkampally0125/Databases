@@ -1,4 +1,17 @@
-INSERT INTO Customer (name) 
+DELETE FROM Customer;
+DELETE FROM MenuItem;
+DELETE FROM Ingredient;
+DELETE FROM Equipment;
+DELETE FROM Recipe;
+DELETE FROM Supplier;
+DELETE FROM Supplies;
+DBCC CHECKIDENT (MenuItem, RESEED, 0);
+DBCC CHECKIDENT (Ingredient, RESEED, 0);
+DBCC CHECKIDENT (Equipment, RESEED, 0);
+DBCC CHECKIDENT (Supplier, RESEED, 0);
+
+
+INSERT INTO Customer (customerName) 
 VALUES 
     ('Jeff'),
     ('Jeffery'),
@@ -34,31 +47,13 @@ VALUES
 
 INSERT INTO Equipment (equipmentName, manufacturer)
 VALUES
-    ('Grill', 'Wholesale Restaurant Equipment'),
-    ('Spatula', 'Wholesale Restaurant Equipment'),
-    ('Frier','Wholesale Restaurant Equipment'),
+    ('Grill', 'Wholesale Equipment'),
+    ('Spatula', 'Wholesale Equipment'),
+    ('Frier','Wholesale Equipment'),
     ('Oven', 'Quality Goods'),
     ('Refrigerator', 'Quality Goods'),
     ('SodaFountain', 'Jeffs Finest'),
     ('Pot', 'Jeffs Finest')
-;
-
-
-INSERT INTO Recipe (menuItemID, ingredientID, equipmentID)
-VALUES
-    ('10', '1', '2'),
-    ('10', '3', '3'),
-    ('11', '1', '2'),
-    ('11', '3', '3'),
-    ('11', '4', '3'),
-    ('12', '7', '4'),
-    ('12', '6', '6'),
-    ('13', '2', '2'),
-    ('13', '6', '6'),
-    ('14', '5', '6'),
-    ('15', '10', '7'),
-    ('16', '8', '5'),
-    ('17', '9', '8')
 ;
 
 INSERT INTO Supplier (supplierName, category)
@@ -67,9 +62,26 @@ VALUES
     ('McCormic', 'Topping'),
     ('Jeffs Best', 'Dairy'),
     ('Potato Man', 'Carbohydrate'),
-    ('Pepsi', 'Drinks'),
+    ('Pepsi', 'Drinks')
 ;
 
+
+INSERT INTO Recipe (menuItemID, ingredientID, equipmentID)
+VALUES
+    ('1', '1', '1'),
+    ('1', '3', '2'),
+    ('2', '1', '1'),
+    ('2', '3', '2'),
+    ('2', '4', '2'),
+    ('3', '7', '3'),
+    ('3', '6', '5'),
+    ('4', '2', '1'),
+    ('4', '6', '5'),
+    ('5', '5', '5'),
+    ('6', '10', '6'),
+    ('7', '8', '4'),
+    ('8', '9', '7')
+;
 
 INSERT INTO Supplies (ingredientID, supplierID)
 VALUES

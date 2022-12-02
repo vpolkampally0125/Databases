@@ -5,29 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.sql.ResultSet;
-//import java.sql.Statement;
-//import java.util.Scanner;
 
 public class UseCases {
 
-    static String connectionUrl;
-
-    // Connect to your database.
-    // Replace server name, username, and password with your credentials
-    public static void main(String[] args) {
-        connectionUrl = "jdbc:sqlserver://CSDSWINLAB017\\SQLEXPRESS;"
-                + "database=restaurantDB;" // change this
-                + "user=dbuser;" // change this
-                + "password=scsd431134dscs;" // change this
-                + "encrypt=true;"
-                + "trustServerCertificate=true;"
-                + "loginTimeout=15;";
-    }
+    static final String connectionUrl = "jdbc:sqlserver://CSDSWINLAB017\\SQLEXPRESS;"
+        + "database=restaurantDB;"      // DB Name
+        + "user=dbuser;"                // user name
+        + "password=scsd431134dscs;"    // password
+        + "encrypt=true;"
+        + "trustServerCertificate=true;"
+        + "loginTimeout=15;";
 
     // for use case 1
     public static void insertOrderSP(String customerName, String menuItem) {
 
-        String callStoredProc = "{call dbo.MakeNewOrder(?,?)}";
+        String callStoredProc = "{call dbo.MakeOrder(?,?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
                 PreparedStatement prepsInsertOrder = connection.prepareStatement(callStoredProc);) {
@@ -173,7 +165,7 @@ public class UseCases {
             prepsFindOrderHistory.setString(1, name);
             
             ResultSet resultSet = prepsFindOrderHistory.executeQuery();
-            String res = "Orders- ";
+            String res = "Orders by ";
             while (resultSet.next()) {
                 res += "#"+resultSet.getString(1) + ":" + resultSet.getString(2); 
             }
@@ -195,7 +187,7 @@ public class UseCases {
             prepsFindSupplierIngredients.setString(1, name);
 
             ResultSet resultSet = prepsFindSupplierIngredients.executeQuery();
-            String res = "Ingredients: ";
+            String res = "Ingredients by ";
             while (resultSet.next()) {
                 res += resultSet.getString(1) + " "; 
             }
