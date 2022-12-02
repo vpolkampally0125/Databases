@@ -8,8 +8,7 @@ as
 
 begin
 
-    select @out = (SELECT *
-    from CustomerOrder
-    where price = @price);
+    select @out = ID from CustomerOrder
+    where price = @price;
 
 end
