@@ -8,5 +8,5 @@ as
 begin
     
 
-    SELECT * from (SELECT * from (SELECT * from (SELECT * from Customer, Buys where customerID = Buys.customerID) as A, Orders where A.orderID = orderID) as B, OrderItems where B.orderID = OrderItemsID) as C, MenuItems where C.OrderItemsID = OrderItemsID
+    SELECT * from (SELECT * from (SELECT * from (SELECT * from Customer, Buys where @customer_name = customerName and customerID = Buys.customerID) as A, Orders where A.orderID = orderID) as B, OrderItems where B.orderID = OrderItemsID) as C, MenuItems where C.OrderItemsID = OrderItemsID
 end
