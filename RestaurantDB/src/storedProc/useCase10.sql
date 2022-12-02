@@ -1,7 +1,7 @@
 
 create procedure FindSupplierIngredients
 
-    @supplier_name varchar(20)
+    @supplier_name varchar(20),
     @out varchar(256) OUTPUT
 
 as
