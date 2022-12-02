@@ -132,5 +132,33 @@ public class UseCases {
         }
     }
 
+    // for use case 9
+    public static void findOrderHistory(String name) {
+
+        String callStoredProc = "{call dbo.FindOrderHistory(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsFindOrderHistory = connection.prepareStatement(callStoredProc);) {
+            prepsFindOrderHistory.setString(1, name);
+            prepsFindOrderHistory.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // for use case 10
+    public static void findSupplierIngredients(String name) {
+
+        String callStoredProc = "{call dbo.FindSupplierIngredients(?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsFindSupplierIngredeints = connection.prepareStatement(callStoredProc);) {
+            prepsFindSupplierIngredeints.setString(1, name);
+            prepsFindSupplierIngredeints.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
