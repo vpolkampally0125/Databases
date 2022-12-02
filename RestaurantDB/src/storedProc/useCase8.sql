@@ -1,14 +1,15 @@
 
 create procedure FindOrdersBasedOnCost
 
-    @cost numeric(10,2)
+    @price numeric(10,2),
+    @out varchar(256) OUTPUT
 
 as
 
 begin
 
-    SELECT *
+    select @out = (SELECT *
     from CustomerOrder
-    where cost = @price
+    where price = @price);
 
 end
