@@ -1,5 +1,5 @@
 
-create procedure DeleteMenuItem
+create procedure DeleteIngredient
 
     @ingredient varchar(20)
 
