@@ -1,8 +1,10 @@
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-//import java.sql.ResultSet;
+import java.sql.Types;
+import java.sql.ResultSet;
 //import java.sql.Statement;
 //import java.util.Scanner;
 
@@ -138,18 +140,20 @@ public class UseCases {
     }
 
     // for use case 8
-    public static void findOrdersBasedOnCost(float cost) {
+    public static String findOrdersBasedOnCost(float cost) {
 
-        String callStoredProc = "{call dbo.FindOrdersBasedOnCost(?)}";
-
+        String callStoredProc = "{call dbo.FindOrdersBasedOnCost(?,?)}";
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement prepsFindOrders = connection.prepareStatement(callStoredProc);) {
+            CallableStatement prepsFindOrders = connection.prepareCall(callStoredProc);) {
             prepsFindOrders.setFloat(1, cost);
-            prepsFindOrders.execute();
+            prepsFindOrders.registerOutParameter(2, Types.VARCHAR);
+            prepsFindOrders.executeUpdate();
+            return "Receipt Number: " + prepsFindOrders.getString(2);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     // for use case 9
