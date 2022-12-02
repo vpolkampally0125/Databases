@@ -1,7 +1,7 @@
 
 create procedure FindSupplierIngredients
 
-@supplier_name varchar(20)
+    @supplier_name varchar(20)
 
 as
 
@@ -9,8 +9,14 @@ begin
 
 
 
-((SELECT * from Supplier JOIN Supplies where SupplierID = Supplies.SupplierID and @supplier_name=name) as A 
-(SELECT * from A JOIN Ingredients where A.IngredientsID = Ingredients.ID))
+    ((SELECT *
+    from Supplier JOIN Supplies 
+    where SupplierID = Supplies.SupplierID and @supplier_name=name)
+    as A
+    (SELECT *
+    from A JOIN Ingredients 
+    where A.IngredientsID = Ingredients.ID)
+    )
 
 
 end
