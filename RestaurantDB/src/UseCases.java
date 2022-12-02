@@ -130,7 +130,7 @@ public class UseCases {
         String callStoredProc = "{call dbo.FindMenuItemIngredients(?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-            CallableStatement prepsFindMenuItemIngredients = connection.prepareCall(callStoredProc);) {
+                CallableStatement prepsFindMenuItemIngredients = connection.prepareCall(callStoredProc);) {
             prepsFindMenuItemIngredients.setString(1, menuItem);
             
             ResultSet resultSet = prepsFindMenuItemIngredients.executeQuery();
@@ -151,7 +151,7 @@ public class UseCases {
 
         String callStoredProc = "{call dbo.FindOrdersBasedOnCost(?,?)}";
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-            CallableStatement prepsFindOrders = connection.prepareCall(callStoredProc);) {
+                CallableStatement prepsFindOrders = connection.prepareCall(callStoredProc);) {
             prepsFindOrders.setFloat(1, cost);
             prepsFindOrders.registerOutParameter(2, Types.VARCHAR);
             prepsFindOrders.executeUpdate();
@@ -164,32 +164,46 @@ public class UseCases {
     }
 
     // for use case 9
-    public static void findOrderHistory(String name) {
+    public static String findOrderHistory(String name) {
 
         String callStoredProc = "{call dbo.FindOrderHistory(?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement prepsFindOrderHistory = connection.prepareStatement(callStoredProc);) {
+                CallableStatement prepsFindOrderHistory = connection.prepareCall(callStoredProc);) {
             prepsFindOrderHistory.setString(1, name);
-            prepsFindOrderHistory.execute();
+            
+            ResultSet resultSet = prepsFindOrderHistory.executeQuery();
+            String res = "Orders: ";
+            while (resultSet.next()) {
+                res += resultSet.getString(1) + " "; 
+            }
+            return res;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     // for use case 10
-    public static void findSupplierIngredients(String name) {
+    public static String findSupplierIngredients(String name) {
 
         String callStoredProc = "{call dbo.FindSupplierIngredients(?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement prepsFindSupplierIngredeints = connection.prepareStatement(callStoredProc);) {
-            prepsFindSupplierIngredeints.setString(1, name);
-            prepsFindSupplierIngredeints.execute();
+                CallableStatement prepsFindSupplierIngredients = connection.prepareCall(callStoredProc);) {
+            prepsFindSupplierIngredients.setString(1, name);
+
+            ResultSet resultSet = prepsFindSupplierIngredients.executeQuery();
+            String res = "Ingredients: ";
+            while (resultSet.next()) {
+                res += resultSet.getString(1) + " "; 
+            }
+            return res;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return "";
     }
 }
