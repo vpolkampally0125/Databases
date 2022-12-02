@@ -56,6 +56,26 @@ public class UseCases {
         }
     }
 
+    // for use case 3
+    public static void changeMenuItem(String menuItem, String ingredientReplaced, String ingredientReplacing,
+            String equipmentReplaced, String equipmentReplacing) {
+
+        String callStoredProc = "{call dbo.ChangeMenuItem(?,?,?,?,?)}";
+
+        try (Connection connection = DriverManager.getConnection(connectionUrl);
+                PreparedStatement prepsChangeMenuItem = connection.prepareStatement(callStoredProc);) {
+            prepsChangeMenuItem.setString(1, menuItem);
+            prepsChangeMenuItem.setString(2, ingredientReplaced);
+            prepsChangeMenuItem.setString(3, ingredientReplacing);
+            prepsChangeMenuItem.setString(4, equipmentReplaced);
+            prepsChangeMenuItem.setString(5, equipmentReplacing);
+            prepsChangeMenuItem.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // for use case 4
     public static void updateOrderSP(int orderID, String menuItem) {
 
