@@ -125,18 +125,25 @@ public class UseCases {
     }
 
     // for use case 7
-    public static void findMenuItemIngredients(String menuItem) {
+    public static String findMenuItemIngredients(String menuItem) {
 
         String callStoredProc = "{call dbo.FindMenuItemIngredients(?)}";
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
-                PreparedStatement prepsFindMenuItemIngredients = connection.prepareStatement(callStoredProc);) {
+            CallableStatement prepsFindMenuItemIngredients = connection.prepareCall(callStoredProc);) {
             prepsFindMenuItemIngredients.setString(1, menuItem);
-            prepsFindMenuItemIngredients.execute();
+            
+            ResultSet resultSet = prepsFindMenuItemIngredients.executeQuery();
+            String res = "Ingredients: ";
+            while (resultSet.next()) {
+                res += resultSet.getString(1) + " "; 
+            }
+            return res;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     // for use case 8
