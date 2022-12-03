@@ -1,4 +1,4 @@
-
+-- This procedure involves inserting a new menu item with type float price, string ingredient, and equipment
 create procedure MakeNewMenuItem
 
     @menu_item_name  varchar(20),
