@@ -1,4 +1,4 @@
-
+-- This procedure involves deleting an existing menu item from the table
 create procedure DeleteMenuItem
 
     @menu_item varchar(20)
