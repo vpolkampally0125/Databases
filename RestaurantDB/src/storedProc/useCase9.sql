@@ -1,4 +1,4 @@
-
+-- This procedure involves selecting all orders that a customer has ordered
 create procedure FindOrderHistory
 
     @customer_name varchar(20)
