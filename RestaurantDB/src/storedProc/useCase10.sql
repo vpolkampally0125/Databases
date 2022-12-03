@@ -1,4 +1,4 @@
-
+-- This procedure involves finding all ingredients that are associated with a supplier
 create procedure FindSupplierIngredients
 
     @supplier_name varchar(20)
