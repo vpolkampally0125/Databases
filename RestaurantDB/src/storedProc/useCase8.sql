@@ -1,4 +1,4 @@
-
+-- This procedure involves finding orders matching a specified cost input parameter
 create procedure FindOrdersBasedOnCost
 
     @price numeric(10,2),
