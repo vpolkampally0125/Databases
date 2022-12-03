@@ -1,4 +1,4 @@
-
+-- This relation involving selecting a specific ingredient from the ingredients database that matches the menu item name
 create procedure FindMenuItemIngredients
 
     @menu_item varchar(20)
