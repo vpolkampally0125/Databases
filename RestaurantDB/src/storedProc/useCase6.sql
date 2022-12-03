@@ -1,4 +1,4 @@
-
+-- This procedure involves deleting an ingredient item from the table
 create procedure DeleteIngredient
 
     @ingredient varchar(20)
