@@ -1,5 +1,5 @@
+-- This use case handles the event when customer names an order with type item_name
 create procedure MakeOrder
-
 @customer_name  varchar(20),
 @item_name  varchar(20),
 
