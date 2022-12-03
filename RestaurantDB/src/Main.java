@@ -141,6 +141,7 @@ class Main {
         panel.setPreferredSize(new Dimension(800, 600));
         frame.pack();   
      }
+    //Insert Menu Item button functionality
      class secondAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             float dollar = 0;
@@ -183,7 +184,7 @@ class Main {
         }
      }
 
-     
+     //Insert Order button functionality
      class firstAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String customerName = JOptionPane.showInputDialog(frame, "Enter Customer Name: ",JOptionPane.PLAIN_MESSAGE);
@@ -202,6 +203,8 @@ class Main {
             }
         }
      }
+    
+    //findMenuItemIngredients button functionality
      class thirdAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String menuItem = JOptionPane.showInputDialog(frame, "Enter Menu Item: ",JOptionPane.PLAIN_MESSAGE);
@@ -222,6 +225,7 @@ class Main {
             }
         }
      }
+    //findOrderBasedOnCost use case button functionality
      class fourthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             boolean virus = false;
@@ -246,6 +250,7 @@ class Main {
             }
         }
     }
+    // DeleteIngredient use case button functionality
      class fifthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String ingredient = JOptionPane.showInputDialog(frame, "Enter ingredient: ",JOptionPane.PLAIN_MESSAGE);
@@ -263,6 +268,7 @@ class Main {
             }
         }
      }
+    //updateOrderSP use case button functionality
      class sixthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String menuItem = JOptionPane.showInputDialog(frame, "Enter menuItem ",JOptionPane.PLAIN_MESSAGE);
@@ -281,6 +287,7 @@ class Main {
             }
         }
      }
+    //Delete Menu Item use case Button Functionality
      class seventhAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String menuItem = JOptionPane.showInputDialog(frame, "Enter menuItem ",JOptionPane.PLAIN_MESSAGE);
@@ -298,7 +305,7 @@ class Main {
             }
         }
      }
-     
+     //change Menu Item use case button Functionality
      class eighthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String menuItem = JOptionPane.showInputDialog(frame, "Enter Menu Item: ",JOptionPane.PLAIN_MESSAGE);
@@ -320,6 +327,7 @@ class Main {
             }
         }
      }
+    //findOrderHistory use case button functionality
      class ninthAction implements ActionListener{
         
         public void actionPerformed(ActionEvent e) {
@@ -341,6 +349,7 @@ class Main {
             }
         }
      }
+    //find supplier ingredients use case button functionality
      class tenthAction implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             String supplierName = JOptionPane.showInputDialog(frame, "Enter Name of Supplier ",JOptionPane.PLAIN_MESSAGE);
