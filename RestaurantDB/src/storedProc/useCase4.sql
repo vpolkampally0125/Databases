@@ -1,4 +1,4 @@
-
+-- This procedure handles a change in an existing order given id
 create procedure ChangeOrder
 
     @order_id  int,
