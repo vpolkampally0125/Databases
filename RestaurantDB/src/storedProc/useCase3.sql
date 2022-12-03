@@ -1,4 +1,4 @@
-
+-- This procedure handles when a restaurant changes an existing menu_item
 create procedure ChangeMenuItem
 
     @menu_item_name varchar(20),
