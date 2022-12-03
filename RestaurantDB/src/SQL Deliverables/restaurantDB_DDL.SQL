@@ -48,6 +48,7 @@ create table Recipe (
     foreign key(equipmentID) references Equipment (ID) on delete cascade,
     foreign key(ingredientID) references Ingredient (ID) on delete cascade
 );
+
 create table Supplies (
     ingredientID INT NOT NULL,
     supplierID INT NOT NULL,
@@ -55,6 +56,7 @@ create table Supplies (
     foreign key(ingredientID) references Ingredient (ID) on delete cascade,
     foreign key(supplierID) references Supplier (ID) on delete cascade
 );
+
 create table OrderedItem (
     orderID INT NOT NULL,
     menuItemID INT NOT NULL,
@@ -62,6 +64,7 @@ create table OrderedItem (
     foreign key(orderID) references CustomerOrder (ID) on delete cascade,
     foreign key(menuItemID) references MenuItem (ID) on delete cascade
 );
+
 create table Buys (
     customerID INT NOT NULL,
     orderID INT NOT NULL,
